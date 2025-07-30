@@ -1,0 +1,14 @@
+[credential]
+	helper = manager.core
+	helper = 
+	helper = /usr/local/bin/git-credential-manager
+	credentialStore = gpg
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+[core]
+	editor = code --wait
+[user]
+	name = Diego López torres
+	email = diego.lpz.trrs.dev@gmail.com
+[init]
+	defaultBranch = main

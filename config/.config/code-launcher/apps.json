@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "alias": "PeerVault",
+      "directory": "/home/diegopher/Documents/taloon/PeerVault",
+      "command": "npm run dev"
+    },
+    {
+      "alias": "Spoon",
+      "directory": "/home/diegopher/Documents/Taloon/SpoonMP",
+      "command": "npm run dev"
+    }
+  ]
+}

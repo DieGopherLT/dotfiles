@@ -1,0 +1,19 @@
+#!/bin/bash
+
+PortToKill=$1
+
+if [[ -z "$PortToKill" ]]; then
+  echo "Usage: $0 <port>"
+  exit 1
+fi
+
+ProcessIdUsingPort=$(lsof -t -i :$PortToKill)
+
+if [[ -z "$ProcessIdUsingPort" ]]; then
+  echo "No process found using port $PortToKill"
+  exit 0
+fi
+
+echo "Killing process with PID $ProcessIdUsingPort on port $PortToKill..."
+kill -9 $ProcessIdUsingPort
+echo "Process terminated."
