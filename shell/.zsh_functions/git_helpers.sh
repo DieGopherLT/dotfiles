@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushale() {
+function pushale() {
   LocalBranch=$1
 
   if [[ -z "$LocalBranch" ]]; then
@@ -10,7 +10,7 @@ pushale() {
   fi
 }
 
-pulele() {
+function pulele() {
   LocalBranch=$1
 
   if [[ -z "$LocalBranch" ]]; then

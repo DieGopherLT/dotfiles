@@ -1,0 +1,4 @@
+shell/.bin/act
+
+# Local environment variables (not committed)
+.env.local

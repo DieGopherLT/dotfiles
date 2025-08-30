@@ -6,6 +6,8 @@ alias workspaces='cd "$HOME/Documents/taloon/workspaces"'
 alias dow='cd "$HOME/Downloads"'
 alias docs='cd "$HOME/Documents"'
 alias courses='cd "$HOME/Documents/courses"'
+alias projects='cd "$HOME/Documents/projects"'
+alias tools='cd "$HOME/Documents/tools"'
 
 # Shell related
 alias editrc='code "$HOME/.zshrc"'

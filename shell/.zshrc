@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -73,7 +66,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-
 # =============================================================================
 # PLUGINS CONFIGURATION
 # =============================================================================
@@ -85,14 +77,14 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Define plugins BEFORE loading Oh My Zsh
 plugins=(
-    git                    # Git integration and aliases
-    sudo                   # ESC twice to add sudo to previous command
-    command-not-found      # Suggests packages when command not found
-    docker                 # Docker completion and aliases
-    docker-compose         # Docker Compose completion and aliases
-    npm                    # NPM completion and aliases
-    nvm                    # Node Version Manager integration
-    golang                 # Go language support
+  git               # Git integration and aliases
+  sudo              # ESC twice to add sudo to previous command
+  command-not-found # Suggests packages when command not found
+  docker            # Docker completion and aliases
+  docker-compose    # Docker Compose completion and aliases
+  npm               # NPM completion and aliases
+  nvm               # Node Version Manager integration
+  golang            # Go language support
 )
 
 # =============================================================================
@@ -123,11 +115,24 @@ gsettings set org.gnome.Ptyxis.Profile:/org/gnome/Ptyxis/Profiles/${PROFILE:1:-1
 # =============================================================================
 # Add custom bin directory to PATH
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
 
 # Android SDK configuration
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# NVM configuration (loaded via 'nvm' plugin for lazy loading)
+export NVM_DIR="$HOME/.nvm"
+
+# Setting VSCode as default editor in some flows
+export EDITOR='code --wait'
+
+# Load local environment variables (not committed to git)
+if [[ -f ~/.env.local ]]; then
+  source ~/.env.local
+fi
 
 # =============================================================================
 # CUSTOM FUNCTIONS AND ALIASES
@@ -151,9 +156,8 @@ source ~/.zsh_functions/git_helpers.sh
 # KEY BINDINGS
 # =============================================================================
 # Custom key bindings for better workflow
-bindkey '^ I'   complete-word       # tab          | complete
-bindkey '^ [[Z' autosuggest-accept  # shift + tab  | autosuggest
-
+bindkey '^ I' complete-word        # tab          | complete
+bindkey '^ [[Z' autosuggest-accept # shift + tab  | autosuggest
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -171,22 +175,11 @@ bindkey '^ [[Z' autosuggest-accept  # shift + tab  | autosuggest
 # export ARCHFLAGS="-arch $(uname -m)"
 
 # =============================================================================
-# POWERLEVEL10K THEME CONFIGURATION
-# =============================================================================
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-
-# =============================================================================
-# NODE VERSION MANAGER (NVM) CONFIGURATION
-# =============================================================================
-# Load NVM for Node.js version management
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# =============================================================================
 # STARSHIP THEME CONFIGURATION
 # =============================================================================
 eval "$(starship init zsh)"
+
+# =============================================================================
+# FZF CONFIGURATION
+# =============================================================================
+source <(fzf --zsh)
