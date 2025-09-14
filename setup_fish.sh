@@ -6,7 +6,7 @@ set -e
 command -v git >/dev/null 2>&1 || { echo "Git requerido"; exit 1; }
 
 # Install fish shell
-sudo dnf install -y fish lsd
+sudo dnf install -y fish lsd stow
 
 # Install fisher (fish plugin manager)
 fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
@@ -26,5 +26,7 @@ echo "   (or restart your shell)"
 read -p "Switch to fish? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    rm -r ~/.config/fish 
+    stow fish
     exec fish
 fi
