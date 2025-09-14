@@ -7,9 +7,10 @@
 	useHttpPath = true
 [core]
 	editor = code --wait
+	autocrlf = input
 [user]
 	name = Diego López torres
-	email = diego.lpz.trrs.dev@gmail.com
+	email = diego@diegopher.dev
 [init]
 	defaultBranch = main
 [pull]
