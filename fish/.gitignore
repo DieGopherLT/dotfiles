@@ -1,0 +1,13 @@
+# Fisher plugin installations
+.config/fish/conf.d/
+.config/fish/completions/
+.config/fish/functions/fisher.fish
+.config/fish/functions/*nvm*.fish
+.config/fish/functions/*bass*.fish
+.config/fish/functions/*bass*.py
+.config/fish/fish_variables
+
+# Keep only personal configurations:
+# - config.fish (main config)
+# - functions/aliases.fish (custom aliases)  
+# - functions/git_helpers.fish (custom git functions)
