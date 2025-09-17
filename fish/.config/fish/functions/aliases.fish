@@ -21,3 +21,7 @@ alias gstatus='git status'
 alias ls='lsd'
 alias ll='lsd -l'
 alias la='lsd -la'
+
+# Claude related
+alias editcc='code "$HOME/.claude/CLAUDE.md"'
+alias editcconfig='code "$HOME/.claude.json"'
