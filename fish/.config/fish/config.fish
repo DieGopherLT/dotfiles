@@ -15,7 +15,7 @@ if status is-interactive
     fish_add_path "$HOME/.bin"
     fish_add_path "$HOME/.local/bin"
     fish_add_path "$HOME/go/bin"
-    fish_add_path "/usr/local/go/bin"
+    fish_add_path /usr/local/go/bin
 
     # Android SDK configuration
     set -x ANDROID_HOME "$HOME/Android/Sdk"
@@ -36,10 +36,15 @@ if status is-interactive
     end
 
     # SSH
-    if not pgrep -u (id -u) ssh-agent > /dev/null
+    if not pgrep -u (id -u) ssh-agent >/dev/null
         eval (ssh-agent -c)
+        for key in ~/.ssh/*
+            if not string match -qr '\.(pub|old)$|known_hosts|config' (basename $key)
+                and test -f $key
+                ssh-add $key
+            end
+        end
     end
-    ssh-add -q ~/.ssh/*
 
     # =============================================================================
     # CUSTOM FUNCTIONS AND ALIASES
@@ -65,7 +70,7 @@ if status is-interactive
     fish_add_path "$BUN_INSTALL/bin"
 
     # Starship 
-    if command -v starship > /dev/null
+    if command -v starship >/dev/null
         starship init fish | source
     end
 end
