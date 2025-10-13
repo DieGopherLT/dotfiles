@@ -2,6 +2,7 @@
 
 # Aliases for common directories and tasks
 alias taloon='cd "$HOME/Documents/taloon"'
+alias exhio='cd "$HOME/Documents/exhio"'
 alias workspaces='cd "$HOME/Documents/taloon/workspaces"'
 alias dow='cd "$HOME/Downloads"'
 alias docs='cd "$HOME/Documents"'

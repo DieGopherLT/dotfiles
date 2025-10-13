@@ -35,6 +35,12 @@ if status is-interactive
         source ~/.env.local
     end
 
+    # SSH
+    if not pgrep -u (id -u) ssh-agent > /dev/null
+        eval (ssh-agent -c)
+    end
+    ssh-add -q ~/.ssh/*
+
     # =============================================================================
     # CUSTOM FUNCTIONS AND ALIASES
     # =============================================================================
