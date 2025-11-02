@@ -67,29 +67,34 @@ function sync-env --description "Sync .env files to env-sync directory with stru
     
     echo "🔧 Preparing file structure..."
     
-    # Buscar todos los .env recursivamente y crear estructura con naming correcto
-    for env_file in (find $base_path -name ".env" -type f)
+    # Buscar todos los .env* recursivamente (excluyendo .env.example y directorios no deseados)
+    for env_file in (find $base_path \
+        -type d \( -name node_modules -o -name .git -o -name dist -o -name build -o -name target -o -name vendor -o -name .next -o -name .nuxt \) -prune -o \
+        -type f -name ".env*" ! -name "*.example" -print)
         # Obtener la ruta relativa desde base_path
         set relative_path (string replace $base_path/ "" $env_file)
-        
+
         # Separar proyecto base y subdirectorio
         set path_parts (string split "/" $relative_path)
-        
+
+        # Extraer el nombre del archivo .env (puede ser .env, .env.local, .env.testing, etc.)
+        set env_filename $path_parts[-1]
+
         if test (count $path_parts) -eq 2
-            # Caso: ProyectoBase/.env
+            # Caso: ProyectoBase/.env*
             set project_base $path_parts[1]
-            set new_name "$project_base.env"
+            set new_name "$project_base$env_filename"
         else if test (count $path_parts) -eq 3
-            # Caso: ProyectoBase/frontend/.env o ProyectoBase/server/.env
+            # Caso: ProyectoBase/frontend/.env* o ProyectoBase/server/.env*
             set project_base $path_parts[1]
             set subdirectory $path_parts[2]
-            set new_name "$project_base"_"$subdirectory.env"
+            set new_name "$project_base"_"$subdirectory$env_filename"
         else
-            # Casos más profundos: ProyectoBase/some/deep/path/.env
+            # Casos más profundos: ProyectoBase/some/deep/path/.env*
             set project_base $path_parts[1]
             # Unir todos los directorios intermedios con guiones bajos
             set subdirs (string join "_" $path_parts[2..-2])
-            set new_name "$project_base"_"$subdirs.env"
+            set new_name "$project_base"_"$subdirs$env_filename"
         end
         
         # Copiar al directorio temporal con el nuevo nombre
